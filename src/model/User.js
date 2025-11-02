@@ -1,6 +1,6 @@
 import { ERRORS } from '../constants/index.js';
-import { Lotto } from './index.js';     
-import RandomNumbers from '../utils/index.js';
+import { Lotto } from './index.js';
+import { RandomNumbers } from '../utils/index.js';
 
 class User {
     #numbers;
@@ -10,7 +10,6 @@ class User {
         this.#validate(numbers);
         this.#numbers = numbers / 1000;
         this.#lottos = [];
-        console.log(this.#numbers);
     }
 
     #validate(numbers) {
@@ -45,13 +44,21 @@ class User {
         }
     }
 
-    generateAndStoreLottos() {
+    generateLottos() {
         for (let i = 0; i < this.#numbers; i++) {
             const lottoNumbers = RandomNumbers.pick();
             lottoNumbers.sort((a, b) => a - b);
             const lotto = new Lotto(lottoNumbers);
             this.#lottos.push(lotto);
         }
+    }
+
+    getLottoCount() {
+        return this.#numbers;
+    }
+
+    getLottos() {
+        return this.#lottos;
     }
 
 }

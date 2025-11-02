@@ -7,6 +7,10 @@ export class LottoController {
         try {
             const purchaseAmount = await InputView.readPurchaseAmount();
             const user = new User(purchaseAmount);
+            OutputView.printPurchaseCount(user.getLottoCount());
+            user.generateLottos();
+            const lottos = user.getLottos();
+            OutputView.printLottos(lottos);
 
         } catch (error) {
             OutputView.printError(error.message);
