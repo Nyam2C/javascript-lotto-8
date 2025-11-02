@@ -1,0 +1,1 @@
+export { default as RANDOM } from './RandomNumber.js';
