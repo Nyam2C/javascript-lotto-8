@@ -24,6 +24,10 @@ export class LottoController {
             const bonusNumber = await InputView.readBonusNumber();
             validateBonusNumber(bonusNumber, winningNumbers);
 
+            const results = this.countMatchedNumbers(lottos, winningNumbers, bonusNumber);
+            console.log(results);
+            OutputView.printResults(results);
+
         } catch (error) {
             OutputView.printError(error.message);
             throw error;
@@ -40,10 +44,34 @@ export class LottoController {
         }
 
         for (const lotto of lottos) {
-            const merged = [...lotto.getNumbers(), winning];
-            const matched = LOTTO_RULES.NUMBERS_PER_TICKET * 2 - new Set(merged);
-            const bonusMatched = lotto.getNumbers().includes(bonus);
+            const merged = [...lotto.getNumbers(), ...winning];
+            const matchcount = LOTTO_RULES.NUMBERS_PER_TICKET * 2 - new Set(merged).size;
+            const isBonusMatched = lotto.getNumbers().includes(bonus);
+            console.log(`matchcount: ${matchcount}, isBonusMatched: ${isBonusMatched}`);
+
+            if (matchcount === 6) {
+                rank.first++;
+                continue;
+            }
+            if (matchcount === 5 && isBonusMatched) {
+                rank.second++;
+                continue;
+            }
+            if (matchcount === 5 && !isBonusMatched) {
+                rank.third++;
+                continue;
+            }
+            if (matchcount === 4) {
+                rank.fourth++;
+                continue;
+            }
+            if (matchcount === 3) {
+                rank.fifth++;
+                continue;
+            }
         }
+
+        return rank;
     }
 
 }

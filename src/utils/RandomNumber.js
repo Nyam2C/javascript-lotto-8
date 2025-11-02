@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import LOTTO_RULES from '../constants/lottoRules.js';
+import { LOTTO_RULES } from '../constants/lottoRules.js';
 
 const RandomNumbers = {
     pick: () =>
