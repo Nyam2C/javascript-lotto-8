@@ -48,7 +48,9 @@ class User {
     generateAndStoreLottos() {
         for (let i = 0; i < this.#numbers; i++) {
             const lottoNumbers = RandomNumbers.pick();
-            this.#lottos.push(lottoNumbers);
+            lottoNumbers.sort((a, b) => a - b);
+            const lotto = new Lotto(lottoNumbers);
+            this.#lottos.push(lotto);
         }
     }
 
