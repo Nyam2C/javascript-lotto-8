@@ -6,6 +6,12 @@ const InputView = {
         const input = await MissionUtils.Console.readLineAsync(PROMPTS.PURCHASE_AMOUNT);
         return input;
     },
+
+    async readWinningNumbers() {
+        const input = await MissionUtils.Console.readLineAsync(PROMPTS.WINNING_NUMBER);
+        const winningNumbers = input.split(',').map(x => Number(x.trim()));
+        return winningNumbers;
+    }
 }
 
 export default InputView;
