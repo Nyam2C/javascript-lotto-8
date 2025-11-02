@@ -2,6 +2,8 @@ import { InputView } from '../view/index.js';
 import { OutputView } from '../view/index.js';
 import { User } from '../model/index.js';
 import { validateWinningNumbers, validateBonusNumber } from '../utils/index.js';
+import { LOTTO_RULES } from "../constants/index.js";
+
 
 
 export class LottoController {
@@ -27,4 +29,20 @@ export class LottoController {
             throw error;
         }
     }
+
+    countMatchedNumbers(lottos, winning, bonus) {
+        const rank = {
+            first: 0,
+            second: 0,
+            third: 0,
+            fourth: 0,
+            fifth: 0,
+        }
+
+        for (const lotto of lottos) {
+            const merged = [...lotto.getNumbers(), winning];
+            const matched = LOTTO_RULES.NUMBERS_PER_TICKET * 2 - new Set(merged);
+        }
+    }
+
 }
