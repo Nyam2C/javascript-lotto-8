@@ -1,11 +1,16 @@
 import { ERRORS } from '../constants/index.js';
+import { Lotto } from './index.js';     
+import getRandomNumbers from '../utils/index.js';
 
 class User {
     #numbers;
+    #lottos;
 
     constructor(numbers) {
         this.#validate(numbers);
-        this.#numbers = numbers%1000;
+        this.#numbers = numbers / 1000;
+        this.#lottos = [];
+        console.log(this.#numbers);
     }
 
     #validate(numbers) {
