@@ -1,11 +1,11 @@
 import { Random } from '@woowacourse/mission-utils';
 
-const getRandomNumbers = {
-    pick: (numbers) =>
+const RandomNumbers = {
+    pick: () =>
         Random.pickNumberInRange(
             1,
             45,
-            numbers,
+            6,
         ),
 };
 

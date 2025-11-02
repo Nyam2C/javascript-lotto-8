@@ -1,6 +1,6 @@
 import { ERRORS } from '../constants/index.js';
 import { Lotto } from './index.js';     
-import getRandomNumbers from '../utils/index.js';
+import RandomNumbers from '../utils/index.js';
 
 class User {
     #numbers;
@@ -42,6 +42,13 @@ class User {
     #validateMinAmount(numbers, min = 1000) {
         if (numbers < min) {
             throw new Error(ERRORS.AMOUNT_TOO_SMALL);
+        }
+    }
+
+    generateAndStoreLottos() {
+        for (let i = 0; i < this.#numbers; i++) {
+            const lottoNumbers = RandomNumbers.pick();
+            this.#lottos.push(lottoNumbers);
         }
     }
 

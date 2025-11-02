@@ -1,1 +1,1 @@
-export { getRandomNumbers } from './RandomNumber.js';
+export { RandomNumbers } from './RandomNumber.js';
