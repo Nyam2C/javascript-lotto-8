@@ -12,6 +12,13 @@ const OutputView = {
         });
     },
 
+    printResults(results) {
+        MissionUtils.Console.print(PROMPTS.STATISTICS);
+        results.forEach((result) => {
+            MissionUtils.Console.print(result);
+        });
+    },
+
     printError(errorMessage) {
         MissionUtils.Console.print(errorMessage);
     },
