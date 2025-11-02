@@ -23,3 +23,24 @@ export const validateWinningNumbers = (numbers) => {
     }
 
 };
+
+export const validateBonusNumber = (number, winningNumbers) => {
+
+    if (Number.isNaN(number)) {
+        throw new Error(ERRORS.BONUS_NAN);
+    }
+
+    if (!Number.isInteger(number)) {
+        throw new Error(ERRORS.BONUS_NOT_INT);
+    }
+
+    if (number < LOTTO_RULES.NUMBER_MIN || number > LOTTO_RULES.NUMBER_MAX) {
+        throw new Error(ERRORS.BONUS_RANGE_INVALID);
+    }
+
+    if (winningNumbers.includes(number)) {
+        throw new Error(ERRORS.BONUS_HAS_DUPLICATE);
+    }
+
+};
+

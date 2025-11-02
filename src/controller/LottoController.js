@@ -1,7 +1,7 @@
 import { InputView } from '../view/index.js';
 import { OutputView } from '../view/index.js';
 import { User } from '../model/index.js';
-import { validateWinningNumbers } from '../utils/index.js';
+import { validateWinningNumbers, validateBonusNumber } from '../utils/index.js';
 
 
 export class LottoController {
@@ -18,6 +18,9 @@ export class LottoController {
 
             const winningNumbers = await InputView.readWinningNumbers();
             validateWinningNumbers(winningNumbers);
+
+            const bonusNumber = await InputView.readBonusNumber();
+            validateBonusNumber(bonusNumber, winningNumbers);
 
         } catch (error) {
             OutputView.printError(error.message);
