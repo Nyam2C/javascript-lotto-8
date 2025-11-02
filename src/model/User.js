@@ -5,7 +5,7 @@ class User {
 
     constructor(numbers) {
         this.#validate(numbers);
-        this.#numbers = numbers;
+        this.#numbers = numbers%1000;
     }
 
     #validate(numbers) {
