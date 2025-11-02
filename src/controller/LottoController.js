@@ -42,6 +42,7 @@ export class LottoController {
         for (const lotto of lottos) {
             const merged = [...lotto.getNumbers(), winning];
             const matched = LOTTO_RULES.NUMBERS_PER_TICKET * 2 - new Set(merged);
+            const bonusMatched = lotto.getNumbers().includes(bonus);
         }
     }
 
