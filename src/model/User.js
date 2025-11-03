@@ -1,5 +1,5 @@
 import { ERRORS } from '../constants/index.js';
-import { Lotto } from './index.js';
+import Lotto from '../Lotto.js';
 import { RandomNumbers } from '../utils/index.js';
 
 class User {

@@ -42,7 +42,7 @@ const OutputView = {
                 PROMPTS.RESULTS(line.numbers, bonusBall, prize.toLocaleString(), count)
             );
         }
-        const yieldRate = ((totalPrize / purchaseAmount) * 100).toFixed(2);
+        const yieldRate = ((totalPrize / purchaseAmount) * 100).toFixed(1);
         MissionUtils.Console.print(PROMPTS.RATE_OF_RETURN(yieldRate));
 
     },
