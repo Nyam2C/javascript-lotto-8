@@ -39,36 +39,32 @@ export class LottoController {
             third: 0,
             fourth: 0,
             fifth: 0,
-        }
+        };
 
-        for (const lotto of lottos) {
-            const merged = [...lotto.getNumbers(), ...winning];
-            const matchcount = LOTTO_RULES.NUMBERS_PER_TICKET * 2 - new Set(merged).size;
+        lottos.forEach(lotto => {
+            const matchcount = this.#calculateMatchCount(lotto, winning);
             const isBonusMatched = lotto.getNumbers().includes(bonus);
+            const rankType = this.#determineRank(matchcount, isBonusMatched);
 
-            if (matchcount === 6) {
-                rank.first++;
-                continue;
+            if (rankType) {
+                rank[rankType]++;
             }
-            if (matchcount === 5 && isBonusMatched) {
-                rank.second++;
-                continue;
-            }
-            if (matchcount === 5 && !isBonusMatched) {
-                rank.third++;
-                continue;
-            }
-            if (matchcount === 4) {
-                rank.fourth++;
-                continue;
-            }
-            if (matchcount === 3) {
-                rank.fifth++;
-                continue;
-            }
-        }
+        });
 
         return rank;
+    }
+
+    #calculateMatchCount(lotto, winning) {
+        const merged = [...lotto.getNumbers(), ...winning];
+        return LOTTO_RULES.NUMBERS_PER_TICKET * 2 - new Set(merged).size;
+    }
+
+    #determineRank(matchcount, isBonusMatched) {
+        if (matchcount === 6) return 'first';
+        if (matchcount === 5) return isBonusMatched ? 'second' : 'third';
+        if (matchcount === 4) return 'fourth';
+        if (matchcount === 3) return 'fifth';
+        return null;
     }
 
 }

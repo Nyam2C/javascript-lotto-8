@@ -14,43 +14,32 @@ class User {
 
     #validate(numbers) {
         const n = Number(numbers);
-        this.#validateIsNumber(n);
-        this.#validateIsInteger(n);
-        this.#validateIsThousandsUnit(n);
-        this.#validateMinAmount(n);
-    }
 
-    #validateIsNumber(numbers) {
-        if (Number.isNaN(numbers)) {
+        if (Number.isNaN(n)) {
             throw new Error(ERRORS.AMOUNT_NAN);
         }
-    }
-
-    #validateIsInteger(numbers) {
-        if (!Number.isInteger(numbers)) {
+        if (!Number.isInteger(n)) {
             throw new Error(ERRORS.AMOUNT_NOT_INT);
         }
-    }
-
-    #validateIsThousandsUnit(numbers) {
-        if (numbers % 1000 !== 0) {
+        if (n % 1000 !== 0) {
             throw new Error(ERRORS.AMOUNT_NOT_THOUSANDS);
         }
-    }
-
-    #validateMinAmount(numbers, min = 1000) {
-        if (numbers < min) {
+        if (n < 1000) {
             throw new Error(ERRORS.AMOUNT_TOO_SMALL);
         }
     }
 
     generateLottos() {
         for (let i = 0; i < this.#numbers; i++) {
-            const lottoNumbers = RandomNumbers.pick();
-            lottoNumbers.sort((a, b) => a - b);
-            const lotto = new Lotto(lottoNumbers);
+            const lotto = this.#createLotto();
             this.#lottos.push(lotto);
         }
+    }
+
+    #createLotto() {
+        const numbers = RandomNumbers.pick();
+        numbers.sort((a, b) => a - b);
+        return new Lotto(numbers);
     }
 
     getLottoCount() {
