@@ -26,7 +26,7 @@ export class LottoController {
 
             const results = this.countMatchedNumbers(lottos, winningNumbers, bonusNumber);
             console.log(results);
-            OutputView.printResults(results);
+            OutputView.printResults(results, purchaseAmount);
 
         } catch (error) {
             OutputView.printError(error.message);

@@ -12,7 +12,7 @@ const OutputView = {
         });
     },
 
-    printResults(results) {
+    printResults(results, purchaseAmount) {
         const counts = {
             [RANK.FIRST]: results.first || 0,
             [RANK.SECOND]: results.second || 0,
@@ -20,6 +20,8 @@ const OutputView = {
             [RANK.FOURTH]: results.fourth || 0,
             [RANK.FIFTH]: results.fifth || 0,
         };
+
+        let totalPrize = 0;
 
         MissionUtils.Console.print(PROMPTS.STATISTICS);
 
@@ -31,13 +33,18 @@ const OutputView = {
                 bonusBall = ', 보너스 볼 일치';
             }
 
-            const prize = PRIZE_BY_RANK[line.rank].toLocaleString();
+            const prize = PRIZE_BY_RANK[line.rank];
             const count = counts[line.rank] || 0;
 
+            totalPrize += prize * count;
+
             MissionUtils.Console.print(
-                PROMPTS.RESULTS(line.numbers, bonusBall, prize, count)
+                PROMPTS.RESULTS(line.numbers, bonusBall, prize.toLocaleString(), count)
             );
         }
+        const yieldRate = ((totalPrize / purchaseAmount) * 100).toFixed(2);
+        MissionUtils.Console.print(PROMPTS.RATE_OF_RETURN(yieldRate));
+
     },
 
     printError(errorMessage) {
